@@ -8,6 +8,7 @@ load_dotenv()
 class Config:
     BOT_TOKEN = os.getenv("BOT_TOKEN")
     ADMINS = [int(admin_id) for admin_id in os.getenv("ADMINS").strip().split(',')]
+    TIMEZONE = os.getenv("TIMEZONE")
 
     MAX_RECORDS_PER_USER = int(os.getenv("MAX_RECORDS_PER_USER"))
     RECORD_MONITORING_DELAY = float(os.getenv("RECORD_MONITORING_DELAY"))

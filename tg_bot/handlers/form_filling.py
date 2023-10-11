@@ -5,6 +5,7 @@ from typing import Union
 from aiogram import types, Dispatcher, Bot
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import ChatTypeFilter, Text, Command
+from aiogram.utils.exceptions import ChatNotFound
 from aiogram.utils.markdown import hcode
 
 from tg_bot.config import Config
@@ -331,7 +332,10 @@ async def save_record(callback: types.CallbackQuery, callback_data: dict):
     text = form_completion("Добавлено новий запис", record_data=temp_records.get(uid))
     for adm in Config.ADMINS:
         if adm != uid:
-            await callback.bot.send_message(chat_id=adm, text=text)
+            try:
+                await callback.bot.send_message(chat_id=adm, text=text)
+            except ChatNotFound:
+                continue
 
     text = form_completion("Запис збережено", record_data=temp_records.get(uid))
     await callback.message.edit_text(text=text)
