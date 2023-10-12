@@ -114,7 +114,7 @@ async def choose_date(callback: types.CallbackQuery, callback_data: dict, msg_te
 
         if record_counter == len(timeline):
             temp_records[uid].pop("date", None)
-            text = "Не знайшли свободного часу на цей день\nОберіть дату"
+            text = "Не знайшли вільного часу на цей день\nОберіть дату"
             return await choose_service(callback, callback_data=temp_callback_data[uid]["service"], msg_text=text)
 
         temp_records[uid]["date"] = f"{day}.{month}.{year}"
