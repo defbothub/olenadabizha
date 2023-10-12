@@ -5,7 +5,7 @@ from typing import Union
 from aiogram import types, Dispatcher, Bot
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import ChatTypeFilter, Text, Command
-from aiogram.utils.exceptions import ChatNotFound, BotBlocked
+from aiogram.utils.exceptions import ChatNotFound, BotBlocked, MessageToEditNotFound
 from aiogram.utils.markdown import hcode
 
 from tg_bot.config import Config
@@ -13,6 +13,7 @@ from tg_bot.handlers.admin.panel import cmd_panel
 from tg_bot.handlers.common_questions import show_questions
 from tg_bot.handlers.records import show_records
 from tg_bot.handlers.start import cmd_start
+from tg_bot.keyboards.default.start_keyb import start_keyboard
 from tg_bot.keyboards.inline.back_keyb import back_keyboard
 from tg_bot.keyboards.inline.callback_data import temp_callback as tc, calendar_callback as cc, time_callback as tcb
 from tg_bot.keyboards.inline.date_keyb import calendar_keyboard
@@ -55,14 +56,17 @@ async def start_filling(message: Union[types.Message, types.CallbackQuery], edit
     text = form_completion("Оберіть послугу")
 
     if edit_message:
-        msg = await message.edit_text(text=text, reply_markup=services_keyboard)
+        try:
+            msg = await message.edit_text(text=text, reply_markup=services_keyboard)
+        except MessageToEditNotFound:
+            msg = await message.answer(text=text, reply_markup=services_keyboard)
     else:
         msg = await message.answer(text=text, reply_markup=services_keyboard)
 
     add_msg_to_delete(user_id=uid, msg_id=msg.message_id)
 
 
-async def choose_service(callback: types.CallbackQuery, callback_data: dict):
+async def choose_service(callback: types.CallbackQuery, callback_data: dict, msg_text: str = None):
     logger.info(f"Handler called. {choose_service.__name__}. user_id={callback.from_user.id}")
     await callback.answer()
 
@@ -74,11 +78,11 @@ async def choose_service(callback: types.CallbackQuery, callback_data: dict):
 
     today = date.today()
     markup = calendar_keyboard(year=today.year, month=today.month, day_=today.day)
-    text = form_completion("Оберіть дату", record_data=temp_records.get(uid))
+    text = form_completion(title=(msg_text if msg_text else "Оберіть дату"), record_data=temp_records.get(uid))
     await callback.message.edit_text(text=text, reply_markup=markup)
 
 
-async def choose_date(callback: types.CallbackQuery, callback_data: dict):
+async def choose_date(callback: types.CallbackQuery, callback_data: dict, msg_text: str = None):
     logger.info(f"Handler called. {choose_date.__name__}. user_id={callback.from_user.id}")
     await callback.answer()
 
@@ -101,10 +105,22 @@ async def choose_date(callback: types.CallbackQuery, callback_data: dict):
 
     if arg1 == "day":
         year, month, day = callback_data.get("arg4"), callback_data.get("arg3"), arg2
+
+        record_counter = 0
+        for time_ in timeline:
+            if (str(year) in timeline[time_]) and (str(month) in timeline[time_][str(year)]) and (
+                    str(day) in timeline[time_][str(year)][str(month)]):
+                record_counter += 1
+
+        if record_counter == len(timeline):
+            temp_records[uid].pop("date", None)
+            text = "Не знайшли свободного часу на цей день\nОберіть дату"
+            return await choose_service(callback, callback_data=temp_callback_data[uid]["service"], msg_text=text)
+
         temp_records[uid]["date"] = f"{day}.{month}.{year}"
 
         service = temp_records[uid]["service"]
-        text = form_completion("Оберіть час", record_data=temp_records.get(uid))
+        text = form_completion(title=(msg_text if msg_text else "Оберіть час"), record_data=temp_records.get(uid))
         return await callback.message.edit_text(text=text, reply_markup=time_keyboard(
             year=year, month=month, day=day, service=service))
 
@@ -161,7 +177,15 @@ async def choose_time(callback: types.CallbackQuery, callback_data: dict):
 
     minute = callback_data.get("minute") if callback_data.get("minute") == "30" else "00"
     hour = callback_data.get('hour')
-    temp_records[uid]["time"] = f"{hour}:{minute}"
+    time_ = f"{hour}:{minute}"
+
+    date_list = temp_records[uid]["date"].split(".")
+    year, month, day = str(date_list[2]), str(date_list[1]), str(date_list[0])
+    if (year in timeline[time_]) and (month in timeline[time_][year]) and (day in timeline[time_][year][month]):
+        text = "Цей час вже занято\nОберіть час"
+        return await choose_date(callback, callback_data=temp_callback_data[uid]["date"], msg_text=text)
+
+    temp_records[uid]["time"] = time_
 
     msg = await callback.message.edit_text(text="Введіть контактний номер телефону\nПриклад: 0971826259",
                                            reply_markup=back_keyboard)
@@ -337,8 +361,9 @@ async def save_record(callback: types.CallbackQuery, callback_data: dict):
             except (ChatNotFound, BotBlocked):
                 continue
 
+    await callback.message.delete()
     text = form_completion("Запис збережено", record_data=temp_records.get(uid))
-    await callback.message.edit_text(text=text)
+    await callback.message.answer(text=text, reply_markup=start_keyboard(uid))
 
 
 def register_form_filling(dp: Dispatcher):
