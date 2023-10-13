@@ -2,6 +2,7 @@ import asyncio
 import logging
 from datetime import datetime, timedelta
 
+import pytz
 from aiogram import Bot, types
 
 from tg_bot.config import Config
@@ -23,10 +24,11 @@ async def record_monitor(first_start: bool = False):
                 for month in timeline[time][year]:
                     for day in timeline[time][year][month]:
                         time_ = time.split(':')
-                        current_time = datetime.now()
-                        record_time = datetime(int(year), int(month), int(day), int(time_[0]), int(time_[1]))
-                        flag = False
-                        if current_time >= record_time:
+                        current_time = datetime.now(Config.TIMEZONE)
+                        record_time = datetime(year=int(year), month=int(month), day=int(day), hour=int(time_[0]),
+                                               minute=int(time_[1]), tzinfo=current_time.tzinfo)
+                        print(f"-----------------\nrecord monitoring\ncurrent_time={current_time}\nrecord_time={record_time}")
+                        if current_time.astimezone(pytz.UTC) >= record_time.astimezone(pytz.UTC):
                             user_id = timeline[time][year][month][day]
                             for i in all_records[user_id]:
                                 if all_records[user_id][i]["time"] == time:

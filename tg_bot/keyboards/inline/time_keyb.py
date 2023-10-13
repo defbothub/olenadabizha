@@ -2,6 +2,7 @@ from datetime import datetime, time, date, timedelta
 
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+from tg_bot.config import Config
 from tg_bot.misc.data_handling import amount_time_per_service, timeline
 from tg_bot.keyboards.inline.callback_data import time_callback as tcb
 
@@ -9,7 +10,7 @@ from tg_bot.keyboards.inline.callback_data import time_callback as tcb
 def time_keyboard(year: int, month: int, day: int, service: str):
     keyboard = InlineKeyboardMarkup(row_width=3, inline_keyboard=[])
     input_date = date(int(year), int(month), int(day))
-    current_datetime = datetime.now()
+    current_datetime = datetime.now(Config.TIMEZONE)
     for i in timeline:
         temp = i.split(':')
         if input_date == current_datetime.date():

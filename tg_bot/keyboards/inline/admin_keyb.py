@@ -3,6 +3,7 @@ from datetime import datetime, time, timedelta
 
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+from tg_bot.config import Config
 from tg_bot.keyboards.inline.callback_data import temp_callback as tc, calendar_callback as cc, time_callback as tcb
 from tg_bot.misc.data_handling import timeline, all_records, amount_time_per_service
 
@@ -131,7 +132,7 @@ def work_schedule_time(year: int, month: int, day: int):
     temp_time = {}
     keyboard = InlineKeyboardMarkup(row_width=3, inline_keyboard=[])
     input_date = datetime(int(year), int(month), int(day))
-    current_datetime = datetime.now()
+    current_datetime = datetime.now(Config.TIMEZONE)
     counter = 0
     for i in timeline:
         if i in temp_time:

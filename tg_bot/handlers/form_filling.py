@@ -1,5 +1,5 @@
 import logging
-from datetime import date, timedelta
+from datetime import datetime, timedelta
 from typing import Union
 
 from aiogram import types, Dispatcher, Bot
@@ -76,7 +76,7 @@ async def choose_service(callback: types.CallbackQuery, callback_data: dict, msg
     temp_callback_data[uid] = {"service": callback_data}
     temp_records[uid] = {"service": services.get(name)}
 
-    today = date.today()
+    today = datetime.now(Config.TIMEZONE)
     markup = calendar_keyboard(year=today.year, month=today.month, day_=today.day)
     text = form_completion(title=(msg_text if msg_text else "Оберіть дату"), record_data=temp_records.get(uid))
     await callback.message.edit_text(text=text, reply_markup=markup)
@@ -93,7 +93,7 @@ async def choose_date(callback: types.CallbackQuery, callback_data: dict, msg_te
     uid = callback.from_user.id
     arg1 = callback_data.get("arg1")
     arg2 = callback_data.get("arg2")
-    today = date.today()
+    today = datetime.now(Config.TIMEZONE)
 
     temp_callback_data[uid].update({"date": callback_data})
 

@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from aiogram import types, Dispatcher
 from aiogram.dispatcher.filters import ChatTypeFilter
 
+from tg_bot.config import Config
 from tg_bot.filters.isAdmin import IsAdmin
 from tg_bot.handlers.admin.panel import cmd_panel
 from tg_bot.keyboards.inline.admin_keyb import work_schedule_calendar, work_schedule_time, back_inline, confirm_weekend, \
@@ -30,7 +31,7 @@ async def show_calendar(callback: types.CallbackQuery):
         except KeyError:
             pass
 
-    today = datetime.now()
+    today = datetime.now(Config.TIMEZONE)
     msg = await callback.message.edit_text(text="<b>Графік роботи</b>",
                                            reply_markup=work_schedule_calendar(today.year, today.month, today.day))
     add_msg_to_delete(user_id=uid, msg_id=msg.message_id)
@@ -45,7 +46,7 @@ async def selected_date(callback: types.CallbackQuery, callback_data: dict):
 
     arg1, arg2, arg3 = callback_data.get('arg1'), callback_data.get('arg2'), callback_data.get('arg3')
     arg4 = callback_data.get('arg4')
-    today = datetime.today()
+    today = datetime.now(Config.TIMEZONE)
     uid = callback.from_user.id
 
     if arg1 == "back":

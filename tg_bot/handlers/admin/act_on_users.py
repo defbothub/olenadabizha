@@ -108,7 +108,7 @@ async def show_userdata(message: Union[types.Message, types.CallbackQuery], stat
             add_msg_to_delete(user_id=uid, msg_id=msg_wrong_id.message_id)
             return
 
-        dt = datetime.now()
+        dt = datetime.now(Config.TIMEZONE)
         msg = await message.answer(f"<b>Ви дійсно хочете заблокувати користувача з \nID: {msg_text}?</b>",
                                    reply_markup=remove_inline(
                                        f"banuser_{msg_text}_{dt.date()}_{dt.hour}-{dt.minute}", "Заблокувати"))
