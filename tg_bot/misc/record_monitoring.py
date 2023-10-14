@@ -27,7 +27,6 @@ async def record_monitor(first_start: bool = False):
                         current_time = datetime.now(Config.TIMEZONE)
                         record_time = datetime(year=int(year), month=int(month), day=int(day), hour=int(time_[0]),
                                                minute=int(time_[1]), tzinfo=current_time.tzinfo)
-                        print(f"-----------------\nrecord monitoring\ncurrent_time={current_time}\nrecord_time={record_time}")
                         if current_time.astimezone(pytz.UTC) >= record_time.astimezone(pytz.UTC):
                             user_id = timeline[time][year][month][day]
                             for i in all_records[user_id]:

@@ -13,7 +13,7 @@ from tg_bot.handlers.admin.panel import cmd_panel
 from tg_bot.handlers.common_questions import show_questions
 from tg_bot.handlers.records import show_records
 from tg_bot.handlers.start import cmd_start
-from tg_bot.keyboards.default.start_keyb import start_keyboard
+from tg_bot.keyboards.default.start_keyb import start_keyboard, title_start_recording
 from tg_bot.keyboards.inline.back_keyb import back_keyboard
 from tg_bot.keyboards.inline.callback_data import temp_callback as tc, calendar_callback as cc, time_callback as tcb
 from tg_bot.keyboards.inline.date_keyb import calendar_keyboard
@@ -53,7 +53,7 @@ async def start_filling(message: Union[types.Message, types.CallbackQuery], edit
     if uid in temp_records:
         temp_records.pop(uid)
 
-    text = form_completion("Оберіть послугу")
+    text = form_completion("Ознайомтеся з прайсом, оберіть формат консультації, дату та час 👇")
 
     if edit_message:
         try:
@@ -291,7 +291,8 @@ async def write_name(message: Union[types.Message, types.CallbackQuery], state: 
     sub_msg_id[uid] = msg.message_id
 
     text = "<b>Щоб перейти до сплати, \nнатисніть кнопку - Перейти до сплати</b>"
-    await message.answer(text=text, reply_markup=paid_keyboard)
+    msg = await message.answer(text=text, reply_markup=paid_keyboard)
+    add_msg_to_delete(user_id=uid, msg_id=msg.message_id)
 
     await state.reset_state()
 
@@ -368,7 +369,7 @@ async def save_record(callback: types.CallbackQuery, callback_data: dict):
 
 def register_form_filling(dp: Dispatcher):
     dp.register_message_handler(start_filling, ChatTypeFilter(types.ChatType.PRIVATE),
-                                Text("Записатися") | Command("filling"))
+                                Text(title_start_recording) | Command("filling"))
     dp.register_callback_query_handler(start_filling, ChatTypeFilter(types.ChatType.PRIVATE), text="back_price")
     dp.register_callback_query_handler(choose_service, ChatTypeFilter(types.ChatType.PRIVATE),
                                        tc.filter(title="service"))

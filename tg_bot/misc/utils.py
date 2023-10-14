@@ -5,7 +5,7 @@ from aiogram import Bot
 from aiogram.utils.exceptions import MessageToDeleteNotFound
 from aiogram.utils.markdown import hcode
 
-from tg_bot.misc.data_handling import msg_to_delete, all_records, timeline, reminder, amount_time_per_service
+from tg_bot.misc.data_handling import msg_to_delete, all_records, timeline, amount_time_per_service
 
 
 def form_completion(title: str, record_data: Optional[dict] = None) -> str:

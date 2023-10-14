@@ -2,18 +2,23 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from tg_bot.config import Config
 
+title_start_recording = "Записатися на консультацію"
+title_contacts = "Контакти"
+title_common_questions = "Часті питання"
+title_records = "Мої записи"
+
 
 def start_keyboard(user_id: int) -> ReplyKeyboardMarkup:
     markup = ReplyKeyboardMarkup(
         resize_keyboard=True,
         keyboard=[
             [
-                KeyboardButton(text="Записатися")
+                KeyboardButton(text=title_start_recording)
             ],
             [
-                KeyboardButton(text="Контакти"),
-                KeyboardButton(text="Поширені питання"),
-                KeyboardButton(text="Мої записи")
+                KeyboardButton(text=title_contacts),
+                KeyboardButton(text=title_common_questions),
+                KeyboardButton(text=title_records)
             ]
         ]
     )

@@ -5,6 +5,7 @@ from aiogram.dispatcher.filters import ChatTypeFilter, Text, Command
 from aiogram.utils.markdown import hcode
 
 from tg_bot.config import Config
+from tg_bot.keyboards.default.start_keyb import title_contacts
 from tg_bot.keyboards.inline.contacts_keyb import contacts_keyboard
 
 logger = logging.getLogger(__name__)
@@ -13,7 +14,7 @@ logger = logging.getLogger(__name__)
 async def show_contacts(message: types.Message):
     logger.info(f"Handler called. {show_contacts.__name__}. user_id={message.from_user.id}")
 
-    await message.answer(text="<b>Контакти ⬇️</b>", reply_markup=contacts_keyboard)
+    await message.answer(text="<b>Відвідайте сторінки в соцмережах ⬇️</b>", reply_markup=contacts_keyboard)
 
 
 async def show_phone_number(callback: types.CallbackQuery):
@@ -40,6 +41,6 @@ async def show_office_location(callback: types.CallbackQuery):
 
 def register_contacts(dp: Dispatcher):
     dp.register_message_handler(show_contacts, ChatTypeFilter(types.ChatType.PRIVATE),
-                                Text("Контакти") | Command('contacts'))
+                                Text(title_contacts) | Command('contacts'))
     dp.register_callback_query_handler(show_phone_number, text="contacts_phone_number")
     dp.register_callback_query_handler(show_office_location, text="contacts_office_location")
