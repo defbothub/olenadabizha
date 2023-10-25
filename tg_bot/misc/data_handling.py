@@ -2,8 +2,9 @@ import json
 import logging
 from typing import Dict
 
-all_records, reminder, black_list = {}, {}, {}
+all_records, reminder, black_list, = {}, {}, {}
 questions: Dict[str, list] = {}
+categories, subcategories = [], {}
 
 services = {"online_consultation": "Онлайн консультація", "office_consultation": "Консультація в офісі"}
 timeline = {"9:00": {}, "9:30": {}, "10:00": {}, "10:30": {}, "11:00": {}, "11:30": {}, "12:00": {}, "12:30": {},
@@ -53,6 +54,10 @@ async def load_data():
 
         with open("tg_bot/misc/data/questions.json", "r", encoding="utf-8-sig") as file:
             questions.update(json.load(file))
+
+            categories.extend([category for category in questions])
+            for category in categories:
+                subcategories.update({category: [subcategory for subcategory in questions[category]]})
     except FileNotFoundError:
         pass
 

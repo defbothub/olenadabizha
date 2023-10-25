@@ -1,1 +1,298 @@
-﻿{}
+﻿{
+    "weekend": {
+        "1": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "9:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "2": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "9:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "3": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "10:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "4": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "10:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "5": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "11:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "6": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "11:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "7": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "12:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "8": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "12:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "9": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "13:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "10": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "13:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "11": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "14:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "12": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "14:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "13": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "15:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "14": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "15:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "15": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "16:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "16": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "16:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "17": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "17:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "18": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "17:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "19": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "18:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "20": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "18:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "21": {
+            "service": "Вихідний",
+            "date": "26.10.2023",
+            "time": "19:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "22": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "9:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "23": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "9:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "24": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "10:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "25": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "10:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "26": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "11:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "27": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "11:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "28": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "12:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "29": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "12:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "30": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "13:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "31": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "13:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "32": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "14:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "33": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "14:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "34": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "15:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "35": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "15:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "36": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "16:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "37": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "16:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "38": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "17:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "39": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "17:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "40": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "18:00",
+            "number": "admin",
+            "name": "admin"
+        },
+        "41": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "18:30",
+            "number": "admin",
+            "name": "admin"
+        },
+        "42": {
+            "service": "Вихідний",
+            "date": "27.10.2023",
+            "time": "19:00",
+            "number": "admin",
+            "name": "admin"
+        }
+    }
+}
